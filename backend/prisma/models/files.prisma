@@ -1,0 +1,9 @@
+model File {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  size      BigInt
+  path      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+}
