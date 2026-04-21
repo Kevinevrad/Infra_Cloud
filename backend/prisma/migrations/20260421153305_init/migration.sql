@@ -9,7 +9,7 @@ CREATE TABLE "File" (
     "path" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" TEXT NOT NULL,
+    "userId" UUID NOT NULL,
 
     CONSTRAINT "File_pkey" PRIMARY KEY ("id")
 );
@@ -20,11 +20,12 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "name" TEXT,
     "password" TEXT NOT NULL,
-    "storagePath" TEXT NOT NULL,
+    "storagePath" TEXT,
     "storageQuota" BIGINT NOT NULL DEFAULT 5368709120,
     "storageUsed" BIGINT NOT NULL DEFAULT 0,
-    "role" TEXT NOT NULL DEFAULT 'User',
+    "role" "Role" NOT NULL DEFAULT 'USER',
     "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdBy" UUID,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

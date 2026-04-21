@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, response } from "express";
 import jwt from "jsonwebtoken";
-import { JwtPayload } from "../utils/interfaces";
+import { JwtPayload } from "jsonwebtoken";
 
 // TODO: Implement authentication middleware
 // This middleware should verify the presence and validity of an authentication token (e.g., JWT) in the request headers.
@@ -28,7 +28,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     
   }
 
-  jwt.verify(token,secret, (err) => {
+  jwt.verify(token,secret, (err:any) => {
     if (err) {
       return res.status(401).json({ error: err.message });
     }

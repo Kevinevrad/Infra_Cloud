@@ -3,13 +3,15 @@ model User {
   email        String   @unique
   name         String?
   password     String
-  storagePath  String   @unique
+  storagePath  String?   @unique
   storageQuota BigInt   @default(5368709120)
   storageUsed  BigInt   @default(0)
-  role         String   @default("User")
+  role         Role     @default(USER)
   isActive     Boolean  @default(true)
+  createdBy    String?  @db.Uuid
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  files        File[]
 }
 
 enum Role {

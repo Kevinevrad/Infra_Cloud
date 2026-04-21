@@ -43,3 +43,5 @@ router.post("/register", (req, res) => {
     }
   } catch (error) {}
 });
+
+export default router;
