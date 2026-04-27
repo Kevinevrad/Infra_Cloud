@@ -231,7 +231,7 @@ export type FileWhereInput = {
   path?: Prisma.StringFilter<"File"> | string
   createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-  userId?: Prisma.StringFilter<"File"> | string
+  userId?: Prisma.UuidFilter<"File"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -256,7 +256,7 @@ export type FileWhereUniqueInput = Prisma.AtLeast<{
   path?: Prisma.StringFilter<"File"> | string
   createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-  userId?: Prisma.StringFilter<"File"> | string
+  userId?: Prisma.UuidFilter<"File"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -285,7 +285,7 @@ export type FileScalarWhereWithAggregatesInput = {
   path?: Prisma.StringWithAggregatesFilter<"File"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"File"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"File"> | Date | string
-  userId?: Prisma.StringWithAggregatesFilter<"File"> | string
+  userId?: Prisma.UuidWithAggregatesFilter<"File"> | string
 }
 
 export type FileCreateInput = {
@@ -517,7 +517,7 @@ export type FileScalarWhereInput = {
   path?: Prisma.StringFilter<"File"> | string
   createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-  userId?: Prisma.StringFilter<"File"> | string
+  userId?: Prisma.UuidFilter<"File"> | string
 }
 
 export type FileCreateManyUserInput = {

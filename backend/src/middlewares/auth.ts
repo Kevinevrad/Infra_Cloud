@@ -1,39 +1,48 @@
-import { Request, Response, NextFunction, response } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { JwtPayload } from "jsonwebtoken";
 
-// TODO: Implement authentication middleware
-// This middleware should verify the presence and validity of an authentication token (e.g., JWT) in the request headers.
+type JwtUser = {
+  userId: string;
+  email: string;
+  role: string;
+};
 
-const secret = process.env.JWT_SECRET;
-if (!secret) {
-  throw new Error("JWT_SECRET is not defined in environment variables");
+interface AuthRequest extends Request {
+  user?: JwtUser;
 }
 
-// prettier-ignore
-const auth = (req: Request, res: Response, next: NextFunction) => {
+const secret = process.env.JWT_SECRET;
 
-  const token = req.cookies?.token;
+if (!secret) {
+  throw new Error("JWT_SECRET is not defined");
+}
+
+export const auth = (req: AuthRequest, res: Response, next: NextFunction) => {
+  const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
+    return res.status(401).json({
+      message: "Access denied. No token provided.",
+    });
   }
 
   try {
-    const decoded:JwtPayload = jwt.verify(token,secret ) as JwtPayload
+    const decoded = jwt.verify(token, secret) as JwtUser;
+    console.log(decoded);
 
-    (req as any ).user = decoded;
+    // ✅ Validation minimale du payload
+    if (!decoded.userId || !decoded.role) {
+      return res.status(401).json({
+        message: "Invalid token payload",
+      });
+    }
+
+    req.user = decoded;
+
     next();
   } catch (error) {
-    
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
   }
-
-  jwt.verify(token,secret, (err:any) => {
-    if (err) {
-      return res.status(401).json({ error: err.message });
-    }
-    next();
-  });
 };
-
-export default auth;

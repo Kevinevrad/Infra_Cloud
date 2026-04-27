@@ -2,7 +2,7 @@ import { Role } from "../src/generated/prisma/client";
 import * as bcrypt from "bcrypt";
 import { prisma } from "../src/app";
 
-(async function main() {
+async function main() {
   const hashedPassword = await bcrypt.hash("@dmin99", 10);
 
   const adminUser = await prisma.user.upsert({
@@ -12,7 +12,7 @@ import { prisma } from "../src/app";
       email: "admin@infratp.com",
       name: "Super Admin",
       password: hashedPassword,
-      role: Role.ADMIN, // Utilisation de l'Enum
+      role: Role.ADMIN, // Utilisation de l'Enum ROLE
       storagePath: "/storage/admin", // Chemin local spécifique
       storageQuota: BigInt(107374182400), // 100 Go par exemple
       isActive: true,
@@ -20,7 +20,9 @@ import { prisma } from "../src/app";
   });
 
   console.log(adminUser);
-})()
+}
+
+main()
   .catch((e) => {
     console.error(e);
     process.exit(1);

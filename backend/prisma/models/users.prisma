@@ -3,7 +3,7 @@ model User {
   email        String   @unique
   name         String?
   password     String
-  storagePath  String?   @unique
+  storagePath  String?  @unique
   storageQuota BigInt   @default(5368709120)
   storageUsed  BigInt   @default(0)
   role         Role     @default(USER)

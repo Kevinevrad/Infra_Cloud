@@ -1,5 +1,5 @@
 import express from "express";
-import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaClient, Role } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { config } from "dotenv";
 
@@ -12,4 +12,4 @@ const prisma = new PrismaClient({
   }),
 });
 
-export { app, prisma };
+export { app, prisma, Role };

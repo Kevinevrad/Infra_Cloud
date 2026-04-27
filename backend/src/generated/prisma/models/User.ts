@@ -44,8 +44,9 @@ export type UserMinAggregateOutputType = {
   storagePath: string | null
   storageQuota: bigint | null
   storageUsed: bigint | null
-  role: string | null
+  role: $Enums.Role | null
   isActive: boolean | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,8 +59,9 @@ export type UserMaxAggregateOutputType = {
   storagePath: string | null
   storageQuota: bigint | null
   storageUsed: bigint | null
-  role: string | null
+  role: $Enums.Role | null
   isActive: boolean | null
+  createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,6 +76,7 @@ export type UserCountAggregateOutputType = {
   storageUsed: number
   role: number
   isActive: number
+  createdBy: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -100,6 +103,7 @@ export type UserMinAggregateInputType = {
   storageUsed?: true
   role?: true
   isActive?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -114,6 +118,7 @@ export type UserMaxAggregateInputType = {
   storageUsed?: true
   role?: true
   isActive?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -128,6 +133,7 @@ export type UserCountAggregateInputType = {
   storageUsed?: true
   role?: true
   isActive?: true
+  createdBy?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -224,11 +230,12 @@ export type UserGroupByOutputType = {
   email: string
   name: string | null
   password: string
-  storagePath: string
+  storagePath: string | null
   storageQuota: bigint
   storageUsed: bigint
-  role: string
+  role: $Enums.Role
   isActive: boolean
+  createdBy: string | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -261,11 +268,12 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringFilter<"User"> | string
-  storagePath?: Prisma.StringFilter<"User"> | string
+  storagePath?: Prisma.StringNullableFilter<"User"> | string | null
   storageQuota?: Prisma.BigIntFilter<"User"> | bigint | number
   storageUsed?: Prisma.BigIntFilter<"User"> | bigint | number
-  role?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  createdBy?: Prisma.UuidNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   files?: Prisma.FileListRelationFilter
@@ -276,11 +284,12 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrder
-  storagePath?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrderInput | Prisma.SortOrder
   storageQuota?: Prisma.SortOrder
   storageUsed?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   files?: Prisma.FileOrderByRelationAggregateInput
@@ -297,8 +306,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   storageQuota?: Prisma.BigIntFilter<"User"> | bigint | number
   storageUsed?: Prisma.BigIntFilter<"User"> | bigint | number
-  role?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  createdBy?: Prisma.UuidNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   files?: Prisma.FileListRelationFilter
@@ -309,11 +319,12 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrder
-  storagePath?: Prisma.SortOrder
+  storagePath?: Prisma.SortOrderInput | Prisma.SortOrder
   storageQuota?: Prisma.SortOrder
   storageUsed?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -331,11 +342,12 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
-  storagePath?: Prisma.StringWithAggregatesFilter<"User"> | string
+  storagePath?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   storageQuota?: Prisma.BigIntWithAggregatesFilter<"User"> | bigint | number
   storageUsed?: Prisma.BigIntWithAggregatesFilter<"User"> | bigint | number
-  role?: Prisma.StringWithAggregatesFilter<"User"> | string
+  role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  createdBy?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -345,11 +357,12 @@ export type UserCreateInput = {
   email: string
   name?: string | null
   password: string
-  storagePath: string
+  storagePath?: string | null
   storageQuota?: bigint | number
   storageUsed?: bigint | number
-  role?: string
+  role?: $Enums.Role
   isActive?: boolean
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.FileCreateNestedManyWithoutUserInput
@@ -360,11 +373,12 @@ export type UserUncheckedCreateInput = {
   email: string
   name?: string | null
   password: string
-  storagePath: string
+  storagePath?: string | null
   storageQuota?: bigint | number
   storageUsed?: bigint | number
-  role?: string
+  role?: $Enums.Role
   isActive?: boolean
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.FileUncheckedCreateNestedManyWithoutUserInput
@@ -375,11 +389,12 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storageQuota?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   storageUsed?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.FileUpdateManyWithoutUserNestedInput
@@ -390,11 +405,12 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storageQuota?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   storageUsed?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.FileUncheckedUpdateManyWithoutUserNestedInput
@@ -405,11 +421,12 @@ export type UserCreateManyInput = {
   email: string
   name?: string | null
   password: string
-  storagePath: string
+  storagePath?: string | null
   storageQuota?: bigint | number
   storageUsed?: bigint | number
-  role?: string
+  role?: $Enums.Role
   isActive?: boolean
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -419,11 +436,12 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storageQuota?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   storageUsed?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -433,11 +451,12 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storageQuota?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   storageUsed?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -457,6 +476,7 @@ export type UserCountOrderByAggregateInput = {
   storageUsed?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -476,6 +496,7 @@ export type UserMaxOrderByAggregateInput = {
   storageUsed?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -490,6 +511,7 @@ export type UserMinOrderByAggregateInput = {
   storageUsed?: Prisma.SortOrder
   role?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -517,6 +539,10 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -526,11 +552,12 @@ export type UserCreateWithoutFilesInput = {
   email: string
   name?: string | null
   password: string
-  storagePath: string
+  storagePath?: string | null
   storageQuota?: bigint | number
   storageUsed?: bigint | number
-  role?: string
+  role?: $Enums.Role
   isActive?: boolean
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -540,11 +567,12 @@ export type UserUncheckedCreateWithoutFilesInput = {
   email: string
   name?: string | null
   password: string
-  storagePath: string
+  storagePath?: string | null
   storageQuota?: bigint | number
   storageUsed?: bigint | number
-  role?: string
+  role?: $Enums.Role
   isActive?: boolean
+  createdBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -570,11 +598,12 @@ export type UserUpdateWithoutFilesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storageQuota?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   storageUsed?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -584,11 +613,12 @@ export type UserUncheckedUpdateWithoutFilesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  storagePath?: Prisma.StringFieldUpdateOperationsInput | string
+  storagePath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   storageQuota?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   storageUsed?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  role?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -634,6 +664,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   storageUsed?: boolean
   role?: boolean
   isActive?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   files?: boolean | Prisma.User$filesArgs<ExtArgs>
@@ -650,6 +681,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   storageUsed?: boolean
   role?: boolean
   isActive?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -664,6 +696,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   storageUsed?: boolean
   role?: boolean
   isActive?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -678,11 +711,12 @@ export type UserSelectScalar = {
   storageUsed?: boolean
   role?: boolean
   isActive?: boolean
+  createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "storagePath" | "storageQuota" | "storageUsed" | "role" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "storagePath" | "storageQuota" | "storageUsed" | "role" | "isActive" | "createdBy" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   files?: boolean | Prisma.User$filesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -700,11 +734,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     name: string | null
     password: string
-    storagePath: string
+    storagePath: string | null
     storageQuota: bigint
     storageUsed: bigint
-    role: string
+    role: $Enums.Role
     isActive: boolean
+    createdBy: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1138,8 +1173,9 @@ export interface UserFieldRefs {
   readonly storagePath: Prisma.FieldRef<"User", 'String'>
   readonly storageQuota: Prisma.FieldRef<"User", 'BigInt'>
   readonly storageUsed: Prisma.FieldRef<"User", 'BigInt'>
-  readonly role: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly createdBy: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

@@ -3,4 +3,11 @@ interface JwtPlayload {
   email: string;
 }
 
+interface User {
+  id: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
 export { JwtPlayload };
