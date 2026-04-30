@@ -3,7 +3,10 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#82B93F",
+      main: "#82b93f",
+      second: "#B9D990",
+      third: "#bdffdb",
+      fourth: "#8DA273 ",
     },
     secondary: {
       main: "#4A4A4A",
@@ -30,6 +33,15 @@ export const theme = createTheme({
       fontWeight: 900,
       fontSize: "4rem",
       color: "#4A4A4A", // Titres en gris foncé pour la rigueur
+    },
+  },
+
+  breakpoints: {
+    values: {
+      laptop: 1024,
+      tablet: 640,
+      mobile: 0,
+      desktop: 1280,
     },
   },
 });
