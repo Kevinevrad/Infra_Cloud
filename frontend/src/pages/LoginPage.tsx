@@ -1,103 +1,97 @@
-import { Stack, Divider, Box } from "@mui/material";
-import { theme } from "../styles/theme";
-import MyIcon from "../assets/icon-cloud.svg?react";
+import { Container, Grid, Typography, Button } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useState } from "react";
+import Comp_Input from "../components/Comp_Input";
 
 const LoginPage = () => {
+  const theme = useTheme();
+  const match = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
   return (
     <>
-      <Stack
-        direction="row"
-        divider={
-          <Divider
-            orientation="vertical"
-            flexItem
+      <Container maxWidth="xl">
+        <Grid container spacing={2} sx={{ height: "100vh" }}>
+          <Grid size={{ md: 4 }} sx={{ display: match ? "none" : "visible" }}>
+            <div style={{ border: "1px solid red" }}>
+              <p>{`!-- Content 1 -- ${match}`}</p>
+            </div>
+          </Grid>
+          <Grid
             sx={{
-              backgroundColor: theme.palette.primary.main,
-              height: "70%",
-              margin: "auto 0",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
-          />
-        }
-        sx={{
-          height: "100vh",
-          // justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          sx={{
-            backgroundColor: "#fffffff0",
-            // theme.palette.primary.third,
-            height: "100%",
-            width: "35%",
-            padding: "40px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "60px",
-            padding: "10px",
-          }}
-        >
-          <img src={MyIcon} alt="" srcset="" width="70%" />
-          <Box
-            sx={{
-              width: "90%",
-              padding: "0 10px ",
+            size={{ xs: 12, md: "grow" }}
+          >
+            <Container
+              maxWidth="md"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "4rem",
+              }}
+            >
+              <Typography variant="h1" color="primary">
+                Infra-Cloud
+              </Typography>
+              <CloudUploadIcon
+                sx={{ alignSelf: "flex-start" }}
+                fontSize="large"
+              />
+            </Container>
 
-              textAlign: "center",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "30px",
-                margin: "0",
-                color: theme.palette.primary.main,
+            <Container
+              maxWidth="sm"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: "2rem",
+                gap: "1.5rem",
               }}
             >
-              InfraTp &mdash; Cloud
-            </h2>
-            {/* <CompCarousel></CompCarousel> */}
-            <p
-              style={{
-                textAlign: "justify",
-                border: "1px solid grey",
-                padding: "15px 8px",
-                borderRadius: "5px",
-              }}
-            >
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              natus ducimus ipsa recusandae nostrum
-            </p>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: "white",
-            height: "100%",
-            width: "65%",
-            padding: "10px",
-            display: "flex",
-            flexDirection: "column",
-            // justifyContent: "center",
-            // alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              margin: " auto 5%",
-              width: "90%",
-              height: "90%",
-              border: "1px solid red",
-              padding: "20px",
-              borderRadius: "5px",
-              textAlign: "center",
-            }}
-          >
-            <h1>Welcome Back</h1>
-          </div>
-        </Box>
-      </Stack>
+              <Typography variant="body2">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                in rem, porro mollitia veniam quaerat repellendus fugit modi,
+                sequi dolores quisquam
+              </Typography>
+              <Typography variant="body2">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                in rem, porro mollitia veniam
+              </Typography>
+            </Container>
+
+            <Container maxWidth="sm" sx={{ marginBottom: "2rem" }}>
+              {/* prettier-ignore */}
+              <Comp_Input label="email" id="email" value={email} variant="filled" onchanged={() => setEmail}/>
+              {/* prettier-ignore */}
+              <Comp_Input label="password" id="password" value={pass} variant="filled" onchanged={() => setPass}/>
+            </Container>
+
+            {/* prettier-ignore */}
+            <Container maxWidth="sm" sx={{display: "flex", flexDirection: "column",marginTop: "2rem",}}>
+              <Button
+                variant="text"
+                color="secondary"
+                sx={{ alignSelf: "end", marginBottom: "1.5rem" }}
+              >
+                Password oublier?
+              </Button>
+
+              <Button variant="contained" color="primary" fullWidth>
+                Connexion
+              </Button>
+            </Container>
+          </Grid>
+        </Grid>
+      </Container>
     </>
   );
 };

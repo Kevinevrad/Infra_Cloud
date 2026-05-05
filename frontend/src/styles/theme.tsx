@@ -4,12 +4,13 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: "#82b93f",
-      second: "#B9D990",
-      third: "#bdffdb",
-      fourth: "#8DA273 ",
+      light: "#81b477",
+      dark: "#579c49",
     },
     secondary: {
-      main: "#4A4A4A",
+      main: "#007a7d",
+      light: "#046072",
+      dark: "#2f4858",
     },
     warning: {
       main: "#FF9800",
@@ -24,24 +25,13 @@ export const theme = createTheme({
     },
   },
 
-  spacing: (factor) => `${0.5 * factor}rem`, // Espacement basé sur une unité de 0.5rem
-
   typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-
+    fontFamily: '"Poppins", "Helvetica", "Arial", sans-serif',
     h1: {
       fontWeight: 900,
       fontSize: "4rem",
-      color: "#4A4A4A", // Titres en gris foncé pour la rigueur
-    },
-  },
-
-  breakpoints: {
-    values: {
-      laptop: 1024,
-      tablet: 640,
-      mobile: 0,
-      desktop: 1280,
+      lineHeight: 1.167,
+      letterSpacing: "-0.04562em",
     },
   },
 });
