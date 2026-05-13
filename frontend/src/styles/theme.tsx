@@ -29,7 +29,14 @@ export const theme = createTheme({
     fontFamily: '"Poppins", "Helvetica", "Arial", sans-serif',
     h1: {
       fontWeight: 900,
-      fontSize: "4rem",
+      fontSize: "3.5rem",
+      lineHeight: 1.167,
+      letterSpacing: "-0.04562em",
+    },
+
+    h2: {
+      fontWeight: 900,
+      fontSize: "3rem",
       lineHeight: 1.167,
       letterSpacing: "-0.04562em",
     },

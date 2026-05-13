@@ -1,10 +1,18 @@
 import LoginPage from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
+import { HomePage } from "./pages/HomePage";
+
+import { BrowserRouter, Routes, Route } from "react-router";
 
 function App() {
   return (
-    <>
-      <LoginPage></LoginPage>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

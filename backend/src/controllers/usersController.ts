@@ -39,7 +39,13 @@ const userController = {
         { expiresIn: "2h" },
       );
 
-      res.status(200).json({ message: "Connecter avec succès  ", token });
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+        maxAge: 3600000,
+      });
+      res.status(200).json({ message: "Connecter avec succès  " });
     } catch (error) {
       res.status(500).json({ message: "Erreur lors de la connexion", error });
     }
