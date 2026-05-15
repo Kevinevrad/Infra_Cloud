@@ -1,13 +1,38 @@
-import { Container, Grid, Typography, Button, Card, Link } from "@mui/material";
+import {
+  Container,
+  OutlinedInput,
+  Paper,
+  Box,
+  FormHelperText,
+  Link,
+} from "@mui/material";
+
+const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
+
+import FormControl, { useFormControl } from "@mui/material/FormControl";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useMediaQuery } from "@mui/material";
-import { useTheme } from "@mui/material";
+import { useTheme, FormLabel, Button } from "@mui/material";
 
-import { useState } from "react";
-import Comp_Input from "../components/Comp_Input";
+import { useState, useMemo } from "react";
+
 import { api } from "../api/axios";
 
-const LoginPage = () => {
+function MyFormHelperText() {
+  const { focused } = useFormControl() || {};
+
+  const helperText = useMemo(() => {
+    if (focused) {
+      return "Enter your email!";
+    }
+
+    return "";
+  }, [focused]);
+
+  return <FormHelperText>{helperText}</FormHelperText>;
+}
+
+export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
@@ -60,79 +85,85 @@ const LoginPage = () => {
 
   return (
     <>
-      <Container maxWidth="xl">
-        <Grid
-          container
-          spacing={1}
-          sx={{ height: "100vh", display: "flex", justifyContent: "center" }}
-        >
-          <Grid sx={rightGridStyle} size={{ xs: 12, md: intSmMd ? 6 : 4 }}>
-            <Container
-              // maxWidth="md"
+      <Container
+        maxWidth="md"
+        sx={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <Paper elevation={6}>
+          <div style={{ textAlign: "center" }}>
+            <h1>Sign to your account</h1>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure
+              incidunt a omnis? Fugiat non nobis tempore vero voluptatem aperiam
+              facilis? Id iure veritatis ducimus, reprehenderit impedit magnam
+              facilis voluptas eaque!
+            </p>
+          </div>
+
+          <form action="#" onSubmit={onSubmit}>
+            <Box sx={{ width: "65%", margin: "1.5rem auto" }}>
+              <FormControl sx={{ width: "100%" }}>
+                <label htmlFor="email" style={{ fontSize: "18px" }}>
+                  Email
+                </label>
+                <OutlinedInput
+                  id="email"
+                  name="email"
+                  fullWidth
+                  type="text"
+                  value={email}
+                  onChange={(e) => handleInput(e, setEmail)}
+                />
+                <MyFormHelperText />
+              </FormControl>
+            </Box>
+            <Box sx={{ width: "65%", margin: "1rem auto" }}>
+              <FormControl sx={{ width: "100%" }}>
+                <label htmlFor="password" style={{ fontSize: "18px" }}>
+                  Password
+                </label>
+                <OutlinedInput
+                  id="password"
+                  name="password"
+                  fullWidth
+                  type="password"
+                  value={pass}
+                  onChange={(e) => handleInput(e, setPass)}
+                />
+                <MyFormHelperText />
+              </FormControl>
+            </Box>
+
+            <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "10px",
-                marginBottom: "2.5rem",
+                typography: "body1",
+                width: "65%",
+                textAlign: "right",
+                margin: "0 auto",
+              }}
+              onClick={preventDefault}
+            >
+              <Link href="#">Mot de pass oublier!</Link>
+            </Box>
+
+            <Box
+              sx={{
+                width: "65%",
+                margin: "2rem auto",
               }}
             >
-              <Typography variant={smMedia ? "h2" : "h1"} color="primary">
-                Infra-Cloud
-              </Typography>
-              <CloudUploadIcon
-                sx={{ alignSelf: "flex-start" }}
-                fontSize="large"
-              />
-            </Container>
-
-            <Container>
-              <Card sx={{ padding: "4.5rem 15px" }}>
-                <Container
-                  maxWidth="sm"
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginBottom: "2rem",
-                    gap: "1.5rem",
-                  }}
-                >
-                  <Typography variant="body2" sx={{ textAlign: "justify" }}>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Ipsum in rem, porro mollitia veniam quaerat repellendus
-                    fugit modi, sequi dolores quisquam
-                  </Typography>
-                </Container>
-
-                <Container maxWidth="sm">
-                  <form onSubmit={onSubmit}>
-                    {/* prettier-ignore */}
-                    <Comp_Input error={errors.email} label="email" id="email" value={email} variant="filled" onChange={(ev: any)=>handleInput(ev, setEmail)}/>
-                    {/* prettier-ignore */}
-                    <Comp_Input   error={errors.password}  label="password" id="password" value={pass} variant="filled" onChange={(ev: any) => handleInput(ev, setPass)}/>
-
-                    {/* prettier-ignore */}
-
-                    <div style={{display:"flex", flexDirection:"column",}}>
-                      <Link variant="body2" color="secondary"  sx={{ alignSelf: "end", marginBottom: "1.5rem" }}  >Password oublier?</Link>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      fullWidth
-                    >
-                      Connexion
-                    </Button>
-                    </div>
-                  </form>
-                </Container>
-              </Card>
-            </Container>
-          </Grid>
-        </Grid>
+              <Button variant="contained" color="secondary" fullWidth>
+                Sign In
+              </Button>
+            </Box>
+          </form>
+        </Paper>
       </Container>
     </>
   );
 };
-
-export default LoginPage;
